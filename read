@@ -1,2 +1,32 @@
 AAAAC3NzaC1lZDI1NTE5AAAAIJFjm1yLvGbG/hne51E6bW0T6s1RDzNkMBPUDRNFwR8R
-vv
+You are a senior DevOps auditor. I need my self-hosted GitLab CI/CD to deploy from a runner host to two Linux VMs (dev/test), currently on Proxmox.
+
+Task:
+1) Tell me exactly what data to collect from each VM and from the GitLab host.
+2) Generate a final CI variable map for GitLab:
+   DEV_HOST, DEV_PORT, DEV_USER, DEV_DEPLOY_PATH
+   TEST_HOST, TEST_PORT, TEST_USER, TEST_DEPLOY_PATH
+   SSH_PRIVATE_KEY, SSH_KNOWN_HOSTS
+   DBT_PROJECT_DIR, DBT_PROFILES_DIR
+   POSTGRES_DEV_URL, POSTGRES_TEST_URL
+   CLICKHOUSE_DEV_URL, CLICKHOUSE_TEST_URL
+   ATLAS_DEV_ENV, ATLAS_TEST_ENV
+3) Identify network/firewall/port changes needed in Proxmox and guest OS firewalls.
+4) Validate whether my current GitLab container port bindings are correct for my topology.
+5) Return:
+   - “Missing info” checklist
+   - “Exact commands to run” on GitLab host, Dev VM, Test VM
+   - “Ready/Not Ready” verdict with blockers
+   - A final table of values ready to paste into GitLab CI/CD variables
+
+My current GitLab setup:
+- GitLab web is mapped to host port 8929
+- GitLab SSH is mapped to host port 2222
+- Compose currently binds to 127.0.0.1 for both ports
+- Runner executes on the GitLab host and deploys via SSH to Dev/Test VMs
+- VMs are on Proxmox local network now, may be remote VPS later
+
+Important:
+- Do not suggest destructive DB schema apply actions.
+- Prefer least-privilege and secure defaults.
+- Include host key collection using ssh-keyscan.
