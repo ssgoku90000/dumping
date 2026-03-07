@@ -30,3 +30,28 @@ Important:
 - Do not suggest destructive DB schema apply actions.
 - Prefer least-privilege and secure defaults.
 - Include host key collection using ssh-keyscan.
+--
+
+DEV_HOST	<DEV_VM_IP_OR_FQDN>
+DEV_PORT	22
+DEV_USER	gitlab-cicd
+DEV_DEPLOY_PATH	/opt/data_engineering_stack
+TEST_HOST	<TEST_VM_IP_OR_FQDN>
+TEST_PORT	22
+TEST_USER	gitlab-cicd
+TEST_DEPLOY_PATH	/opt/data_engineering_stack
+SSH_PRIVATE_KEY	<contents of /etc/gitlab-runner/keys/deploy_ed25519>
+SSH_KNOWN_HOSTS	<contents of /tmp/known_hosts.ci>
+DBT_PROJECT_DIR	client_repo/dbt
+DBT_PROFILES_DIR	client_repo/dbt
+POSTGRES_DEV_URL	postgresql://<user>:<pass>@<dev-host>:5432/<db>?sslmode=disable
+POSTGRES_TEST_URL	postgresql://<user>:<pass>@<test-host>:5432/<db>?sslmode=disable
+CLICKHOUSE_DEV_URL	clickhouse://<user>:<pass>@<dev-host>:9000/<db>
+CLICKHOUSE_TEST_URL	clickhouse://<user>:<pass>@<test-host>:9000/<db>
+ATLAS_DEV_ENV	postgres (or your custom env name)
+ATLAS_TEST_ENV	postgres (or your custom env name)
+Security settings in GitLab UI:
+
+Mark SSH_PRIVATE_KEY, DB URLs as Masked + Protected
+Mark SSH_KNOWN_HOSTS as Protected (mask optional)
+Prefer File-type variables for SSH_PRIVATE_KEY and SSH_KNOWN_HOSTS where possible.
