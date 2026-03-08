@@ -59,3 +59,6 @@ Prefer File-type variables for SSH_PRIVATE_KEY and SSH_KNOWN_HOSTS where possibl
 
 jack@jack-Standard-PC-i440FX-PIIX-1996:~/Desktop/key$ hostname -I
 192.168.0.117 172.20.0.1 172.17.0.1 172.18.0.1 172.19.0.1 10.13.13.1 
+
+
+sudo chown -R gitlab-cicd:gitlab-cicd /srv/client_repo
